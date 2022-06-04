@@ -1,5 +1,5 @@
-import { verify } from 'jsonwebtoken';
-import { NextFunction, Request, Response } from 'express';
+import { verify } from "jsonwebtoken";
+import { NextFunction, Request, Response } from "express";
 
 export const verifyToken = (
   req: Request,
@@ -8,7 +8,7 @@ export const verifyToken = (
 ): void => {
   try {
     const authorizationHeader = req.headers.authorization as string;
-    const token = authorizationHeader.split(' ')[1];
+    const token = authorizationHeader.split(" ")[1];
     verify(token, process.env.SECRET_TOKEN as string);
     next();
     return;

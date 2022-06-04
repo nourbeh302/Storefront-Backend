@@ -1,4 +1,4 @@
-import client from '../database';
+import client from "../database";
 
 export type Product = {
   id?: number;

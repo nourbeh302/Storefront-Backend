@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "test": "set ENV=test && db-migrate up -e test && tsc && jasmine && db-migrate -e test reset",
+    "test": "db-migrate up -e test && tsc && jasmine && db-migrate reset -e test",
     "build": "npx tsc",
     "clean": "npx tsc --build --clean",
     "start": "nodemon build/server.js",

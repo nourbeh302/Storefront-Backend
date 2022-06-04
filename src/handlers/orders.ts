@@ -1,6 +1,6 @@
-import { Application, Request, Response } from 'express';
-import { OrderStore, Order } from '../models/order';
-import { verifyToken } from '../middlewares/verifyToken';
+import { Application, Request, Response } from "express";
+import { OrderStore, Order } from "../models/order";
+import { verifyToken } from "../middlewares/verifyToken";
 
 const store = new OrderStore();
 
@@ -16,7 +16,7 @@ const getAllOrders = async (req: Request, res: Response) => {
 
 const getSingleOrder = async (req: Request, res: Response) => {
   try {
-    const order = await store.show(+ req.params.id);
+    const order = await store.show(+req.params.id);
     if (order) {
       res.json(order);
     } else {
@@ -48,7 +48,7 @@ const updateOrder = async (req: Request, res: Response) => {
       status: req.body.status,
       userId: req.body.userId,
     };
-    const order = await store.update(newOrder.status, + req.params.id);
+    const order = await store.update(newOrder.status, +req.params.id);
     res.json(order);
   } catch (error) {
     console.log(error);
@@ -58,7 +58,7 @@ const updateOrder = async (req: Request, res: Response) => {
 
 const deleteOrder = async (req: Request, res: Response) => {
   try {
-    const order = await store.delete(+ req.params.id);
+    const order = await store.delete(+req.params.id);
     res.json(order);
   } catch (error) {
     console.log(error);
@@ -80,12 +80,12 @@ const addProduct = async (req: Request, res: Response) => {
 };
 
 const ordersRoutes = (app: Application) => {
-  app.get('/orders', verifyToken, getAllOrders);
-  app.get('/orders/:id', verifyToken, getSingleOrder);
-  app.post('/orders', verifyToken, createOrder);
-  app.put('/orders/:id', verifyToken, updateOrder);
-  app.delete('/orders/:id', verifyToken, deleteOrder);
-  app.post('/orders/:id/products', verifyToken, addProduct);
+  app.get("/orders", verifyToken, getAllOrders);
+  app.get("/orders/:id", verifyToken, getSingleOrder);
+  app.post("/orders", verifyToken, createOrder);
+  app.put("/orders/:id", verifyToken, updateOrder);
+  app.delete("/orders/:id", verifyToken, deleteOrder);
+  app.post("/orders/:id/products", verifyToken, addProduct);
 };
 
 export default ordersRoutes;

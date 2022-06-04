@@ -1,7 +1,7 @@
-import { Application, Request, Response } from 'express';
-import { UserStore, User } from '../models/user';
-import { sign } from 'jsonwebtoken';
-import { verifyToken } from '../middlewares/verifyToken';
+import { Application, Request, Response } from "express";
+import { UserStore, User } from "../models/user";
+import { sign } from "jsonwebtoken";
+import { verifyToken } from "../middlewares/verifyToken";
 
 const store = new UserStore();
 
@@ -17,7 +17,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 const getSingleUser = async (req: Request, res: Response) => {
   try {
-    const user = await store.show(+ req.params.id);
+    const user = await store.show(+req.params.id);
     if (user) {
       res.json(user);
     } else {
@@ -52,7 +52,7 @@ const updateUser = async (req: Request, res: Response) => {
       lastName: req.body.lastName,
       password: req.body.password,
     };
-    const user = await store.update(newUser, + req.params.id);
+    const user = await store.update(newUser, +req.params.id);
     res.json(user);
   } catch (error) {
     console.log(error);
@@ -62,7 +62,7 @@ const updateUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
-    const user = await store.delete(+ req.params.id);
+    const user = await store.delete(+req.params.id);
     res.json(user);
   } catch (error) {
     console.log(error);
@@ -71,11 +71,11 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 const usersRoutes = (app: Application) => {
-  app.get('/users', verifyToken, getAllUsers);
-  app.get('/users/:id', verifyToken, getSingleUser);
-  app.post('/users', createUser);
-  app.put('/users/:id', verifyToken, updateUser);
-  app.delete('/users/:id', verifyToken, deleteUser);
+  app.get("/users", verifyToken, getAllUsers);
+  app.get("/users/:id", verifyToken, getSingleUser);
+  app.post("/users", createUser);
+  app.put("/users/:id", verifyToken, updateUser);
+  app.delete("/users/:id", verifyToken, deleteUser);
 };
 
 export default usersRoutes;

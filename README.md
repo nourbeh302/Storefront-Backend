@@ -45,7 +45,7 @@ In this repo there is a `REQUIREMENTS.md` document which outlines what this API 
 # Create user
 CREATE USER nourbeh WITH PASSWORD '123456789';
 
-# Create Database
+# Create database
 CREATE DATABASE storefront_dev;
 CREATE DATABASE storefront_test;
 
@@ -69,7 +69,7 @@ db-migrate reset
 db-migrate create users-table --sql-file
 db-migrate create products-table --sql-file
 db-migrate create orders-table --sql-file
-db-migrate create orders-products-table --sql-file
+db-migrate create orders_products-table --sql-file
 ```
 
 ### .env

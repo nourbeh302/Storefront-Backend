@@ -156,7 +156,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 | Data | Data Types | Constraints  |
 | ------------------ | ------------------ |  ------------------ |
 | id | SERIAL | PRIMARY KEY |
-| orderId | INTEGER | REFERENCES orders(id) |
-| productId | INTEGER | REFERENCES products(id) |
+| order_id | INTEGER | REFERENCES orders(id) |
+| product_id | INTEGER | REFERENCES products(id) |
 | quantity | INT | NOT NULL |
 
