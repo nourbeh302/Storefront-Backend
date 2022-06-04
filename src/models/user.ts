@@ -1,4 +1,5 @@
 import client from '../database';
+import { hashSync } from 'bcrypt';
 
 export type User = {
   id?: number;
@@ -36,10 +37,11 @@ export class UserStore {
     try {
       const conn = await client.connect();
       const sql = `INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING id, firstName, lastName;`;
+      const hashedPassword = await hashSync(user.password, + (process.env.SALT_ROUNDS as unknown as string))
       const result = await conn.query(sql, [
         user.firstName,
         user.lastName,
-        user.password,
+        hashedPassword,
       ]);
       conn.release();
       return result.rows[0];
@@ -52,11 +54,12 @@ export class UserStore {
     try {
       const conn = await client.connect();
       const sql = `UPDATE users SET firstName = ($2), lastName = ($3), password = ($4) WHERE id = ($1) RETURNING id, firstName, lastName;`;
+      const hashedPassword = await hashSync(newUser.password, + (process.env.SALT_ROUNDS as unknown as string))
       const result = await conn.query(sql, [
         oldUserId,
         newUser.firstName,
         newUser.lastName,
-        newUser.password,
+        hashedPassword,
       ]);
       conn.release();
       return result.rows[0];
