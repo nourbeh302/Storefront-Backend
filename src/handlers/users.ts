@@ -1,5 +1,7 @@
 import { Application, Request, Response } from 'express';
 import { UserStore, User } from '../models/user';
+import { sign } from 'jsonwebtoken';
+import { verifyToken } from '../middlewares/verifyToken';
 
 const store = new UserStore();
 
@@ -35,7 +37,8 @@ const createUser = async (req: Request, res: Response) => {
       password: req.body.password,
     };
     const user = await store.create(newUser);
-    res.status(201).json(user);
+    const token = sign(user, process.env.SECRET_TOKEN as unknown as string);
+    res.status(201).json(token);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -68,11 +71,11 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 const usersRoutes = (app: Application) => {
-  app.get('/users', getAllUsers);
-  app.get('/users/:id', getSingleUser);
+  app.get('/users', verifyToken, getAllUsers);
+  app.get('/users/:id', verifyToken, getSingleUser);
   app.post('/users', createUser);
-  app.put('/users/:id', updateUser);
-  app.delete('/users/:id', deleteUser);
+  app.put('/users/:id', verifyToken, updateUser);
+  app.delete('/users/:id', verifyToken, deleteUser);
 };
 
 export default usersRoutes;

@@ -2,7 +2,7 @@ import { Order, OrderStore } from "../models/order";
 
 const store = new OrderStore();
 
-describe('Orders spec', () => {
+xdescribe('Orders spec', () => {
   describe('testing order methods', () => {
     it('gets all orders', () => {
       expect(store.index).toBeDefined();

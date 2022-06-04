@@ -4,14 +4,15 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "test": "set ENV=test&& db-migrate -e test up && tsc && jasmine && db-migrate -e test reset",
+    "test": "set ENV=test && db-migrate up -e test && tsc && jasmine && db-migrate -e test reset",
     "build": "npx tsc",
     "clean": "npx tsc --build --clean",
     "start": "nodemon build/server.js",
     "prettier": "prettier ./src/**/*.ts --write",
     "lint": "eslint src/**/*.ts",
     "migrate:up": "db-migrate up",
-    "migrate:down": "db-migrate down"
+    "migrate:down": "db-migrate down",
+    "migrate:clear": "db-migrate reset"
 
   },
   "repository": {

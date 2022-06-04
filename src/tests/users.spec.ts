@@ -2,7 +2,7 @@ import { User, UserStore } from "../models/user";
 
 const store = new UserStore();
 
-describe('User spec', () => {
+describe('Testing suite for user model', () => {
   describe('testing user methods', () => {
     it('gets all users', () => {
       expect(store.index).toBeDefined();
@@ -12,7 +12,7 @@ describe('User spec', () => {
       expect(store.show).toBeDefined();
     });
 
-    it('creates new user', () => {
+    it('creates new user', async () => {
       expect(store.show).toBeDefined();
     });
 
@@ -20,7 +20,7 @@ describe('User spec', () => {
       expect(store.update).toBeDefined();
     });
 
-    it('deletes a user', () => {
+    it('deletes a user', async () => {
       expect(store.delete).toBeDefined();
     });
   });

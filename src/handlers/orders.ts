@@ -1,5 +1,6 @@
 import { Application, Request, Response } from 'express';
 import { OrderStore, Order } from '../models/order';
+import { verifyToken } from '../middlewares/verifyToken';
 
 const store = new OrderStore();
 
@@ -79,12 +80,12 @@ const addProduct = async (req: Request, res: Response) => {
 };
 
 const ordersRoutes = (app: Application) => {
-  app.get('/orders', getAllOrders);
-  app.get('/orders/:id', getSingleOrder);
-  app.post('/orders', createOrder);
-  app.put('/orders/:id', updateOrder);
-  app.delete('/orders/:id', deleteOrder);
-  app.post('/orders/:id/products', addProduct);
+  app.get('/orders', verifyToken, getAllOrders);
+  app.get('/orders/:id', verifyToken, getSingleOrder);
+  app.post('/orders', verifyToken, createOrder);
+  app.put('/orders/:id', verifyToken, updateOrder);
+  app.delete('/orders/:id', verifyToken, deleteOrder);
+  app.post('/orders/:id/products', verifyToken, addProduct);
 };
 
 export default ordersRoutes;
