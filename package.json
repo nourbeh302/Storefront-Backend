@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "nodemon build/server.js"
+    "clean": "npx tsc --build --clean",
+    "start": "nodemon build/server.js",
+    "prettier": "prettier ./src/**/*.ts --write",
+    "lint": "eslint src/**/*.ts",
+    "migrate:up": "db-migrate up",
+    "migrate:down": "db-migrate down"
+
   },
   "repository": {
     "type": "git",
