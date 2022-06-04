@@ -3,7 +3,7 @@ import client from '../database';
 export type Order = {
   id?: number;
   status: string;
-  user_id: number;
+  userId: number;
 };
 
 export class OrderStore {
@@ -35,7 +35,7 @@ export class OrderStore {
     try {
       const conn = await client.connect();
       const sql = `INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *;`;
-      const result = await conn.query(sql, [order.status, order.user_id]);
+      const result = await conn.query(sql, [order.status, order.userId]);
       conn.release();
       return result.rows[0];
     } catch (error) {
